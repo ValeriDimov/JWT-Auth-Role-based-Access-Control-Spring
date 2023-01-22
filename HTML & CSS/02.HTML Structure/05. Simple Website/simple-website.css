@@ -1,0 +1,44 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #cccccc;
+}
+
+nav a {
+  text-decoration: none;
+  color: #ffffff;
+}
+nav li {
+  font-size: 24px;
+  line-height: 40px;
+  height: 40px;
+  padding: 20px;
+  display: inline-block;
+}
+nav ul {
+  background-color: #444;
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}
+
+article {
+  padding: 5px 15px;
+  margin: 15px 10px;
+}
+
+article h2 + p{
+    font-style: italic;
+}
+
+article p +p {
+    font-size: 18px;
+}
+
+footer p {
+  background-color: #444;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
