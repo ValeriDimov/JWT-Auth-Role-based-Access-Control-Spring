@@ -1,0 +1,43 @@
+html {
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.headings {
+  font-family: Georgia, serif;
+}
+
+table {
+  border: 1px solid lightgrey;
+  width: 100%;
+}
+
+td {
+  padding: 2px 8px;
+  width: calc(100% / 3);
+}
+
+thead tr {
+  background-color: gray;
+  font-weight: bold;
+}
+
+tbody > tr:nth-child(odd) {
+  background-color: lightgray;
+}
+
+blockquote {
+    border-left: 4px solid rgb(221,221,221) ;
+    font-style: italic;
+    font-weight: bold;
+}
+
+blockquote p {
+    padding: 6px;
+    padding-left: 24px;
+}
+
+blockquote p:last-child {
+    text-align: right;
+}
