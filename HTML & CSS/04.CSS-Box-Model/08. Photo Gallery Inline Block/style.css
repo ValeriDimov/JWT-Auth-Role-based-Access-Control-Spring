@@ -1,0 +1,24 @@
+body {
+  padding: 5rem;
+  background-color: #eee;
+}
+
+ul {
+  list-style: none;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+img {
+  display: flex;
+  width: 28%;
+  background-color: #fff;
+  border: 0.4rem solid black;
+  padding: 1rem;
+  margin: 0.5rem auto;
+}
+
