@@ -1,0 +1,54 @@
+@import "https://use.fontawesome.com/releases/v5.10.2/css/all.css";
+
+/* General styling */
+* {
+  box-sizing: border-box;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 800px;
+  align-items: center;
+}
+
+img {
+  display: block;
+  align-items: center;
+  align-self: auto;
+}
+
+.one {
+  background: -webkit-linear-gradient(left, blue, lightblue, lightgreen);
+}
+
+.two {
+  background: -webkit-linear-gradient(left, pink, orange);
+}
+
+.i-pos2 {
+    position: relative;
+}
+
+.second-i {
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 6px;
+}
+
+.i-pos1 {
+    position: relative;
+}
+
+.first-i {
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 6px;
+}
+
+
