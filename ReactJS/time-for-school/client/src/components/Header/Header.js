@@ -19,7 +19,7 @@ export const Header = () => {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto col-12 justify-content-between">
-                <block>
+                <div className="navbar">
                     {isAuthenticated && (
                         <>
                         <li className="nav-item">
@@ -31,15 +31,15 @@ export const Header = () => {
                             <div className="form-inline my-2 my-lg-0 px-3">
                             <div className="nav-link text-white">
                                 <span>Здравейте</span>
-                                <block>, {name == null ? userEmail : name }!</block>
+                                <span>, {name == null ? userEmail : name }!</span>
                             </div>
                             </div>
                         </li>
                         </>
                     )}
-                </block>
+                </div>
 
-                <block>
+                <div className="navbar">
                     {!isAuthenticated && (
                         <>
                         <li className="nav-item">
@@ -59,7 +59,7 @@ export const Header = () => {
                         Изход
                         </Link>
                     )}
-                </block>
+                </div>
           </ul>
         </div>
       </nav>
