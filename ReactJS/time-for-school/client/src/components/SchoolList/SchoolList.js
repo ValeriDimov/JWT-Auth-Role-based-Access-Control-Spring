@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { SchoolItem } from "./SchoolItem/SchoolItem";
 
-export const SchoolList = () => {
+export const SchoolList = ({
+    schools,
+}) => {
   return (
     <div className="container-fluid">
         <form
@@ -28,8 +30,8 @@ export const SchoolList = () => {
             >Назад</Link>
         </div>
 
-        {games.map(x =>
-                <SchoolItem key={x._id} {...x} />
+        {schools.map(x =>
+                <SchoolItem schoolId={x._id} key={x._id} {...x} />
             )}
         
     </div>

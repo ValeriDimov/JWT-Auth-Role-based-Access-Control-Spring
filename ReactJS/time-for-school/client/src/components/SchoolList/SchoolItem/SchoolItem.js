@@ -1,40 +1,50 @@
-export const SchoolItem = () => {
+import { Link } from "react-router-dom";
+
+export const SchoolItem = ({
+        // address,
+        // director,
+        // email,
+        // telephone,
+        name,
+        school_url,
+        city,
+        district,
+        profile,
+        _id
+    }) => {
     return (
         <div
-            th:each="school : ${schools.getContent()}"
-            th:object="${school}"
             className="schools row mx-auto d-flex flex-row justify-content-center"
         >
-            <div className="offer card col-sm-4 col-md-6  col-lg-8 m-1 p-0">
+            <div className="offer card col-sm-4 col-md-6 col-lg-8 m-1 p-0">
             <div className="card-body pb-1">
                 <h4 className="card-title text-center">
-                <th:block th:text="*{name}"></th:block>
+                <p>{name}</p>
                 </h4>
                 <h5 className="card-title text-center">
-                <th:block th:text="*{cityName}"></th:block>
+                <p>{city}</p>
                 </h5>
                 <h5 className="card-title text-center">
-                <th:block th:text="*{districtName}"></th:block>
+                <p>{district}</p>
                 </h5>
                 <h6 className="card-title text-center">
-                <span th:text="#{schools_website}"></span>
+                <span> - Уебсайт на училището: </span>
                 <span>
-                    <th:block th:text="*{schoolUrl}"></th:block>
+                    <block>{school_url}</block>
                 </span>
                 </h6>
             </div>
 
             <h6 className="card-title">
-                <span th:text="#{schools_profiles}"></span>
+                <span> - Обучителен профил: </span>
             </h6>
             <ul
                 className="offer-details list-group list-group-flush"
-                th:each="schoolProfile : ${school.getSchoolProfiles()}"
             >
                 <li className="list-group-item">
                 <div className="card-text">
                     <span>
-                    <th:block th:text="${schoolProfile.toString()}"></th:block>
+                    <block>{profile}</block>
                     </span>
                 </div>
                 </li>
@@ -42,10 +52,9 @@ export const SchoolItem = () => {
             <div className="card-body">
                 <Link
                 className="card-link"
-                to={`/schools/${id})`}
-                th:text="#{schools_details}"
+                to={`/schools/${_id}`}
                 >
-                Details
+                Детайли
                 </Link>
             </div>
             </div>
