@@ -30,7 +30,7 @@ export const SchoolItem = ({
                 <h6 className="card-title text-center">
                 <span> - Уебсайт на училището: </span>
                 <span>
-                    <block>{school_url}</block>
+                    <div>{school_url}</div>
                 </span>
                 </h6>
             </div>
@@ -44,7 +44,7 @@ export const SchoolItem = ({
                 <li className="list-group-item">
                 <div className="card-text">
                     <span>
-                    <block>{profile}</block>
+                    <div>{profile}</div>
                     </span>
                 </div>
                 </li>

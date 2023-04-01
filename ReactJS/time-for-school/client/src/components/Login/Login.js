@@ -5,7 +5,7 @@ import { useForm } from "../../hooks/useForm";
 
 const LoginFormKeys = {
     Email: "email",
-  Password: "password",
+    Password: "password",
 };
 
 export const Login = () => {

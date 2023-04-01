@@ -28,34 +28,34 @@ export const SchoolDetails = () => {
                 <div className="offer card col-sm-4 col-md-6 col-lg-8 m-1 p-0">
                     <div className="card-body pb-1">
                         <h4 className="card-title text-center">
-                            <tblock>{school.name}</tblock>
+                            <span>{school.name}</span>
                         </h4>
                         <h5 className="card-title text-center">
-                            <block>{school.city}</block>
+                            <span>{school.city}</span>
                         </h5>
                         <h5 className="card-title text-center">
-                            <block>{school.district}</block>
+                            <span>{school.district}</span>
                         </h5>
                         <h6 className="card-title text-center"><span> - Уебсайт на училището: </span>
-                            <span><block>{school.school_url}</block></span>
+                            <span>{school.school_url}</span>
                         </h6>
                     </div>
 
                     <h6 className="card-title"><span> - Обучителнен профил: </span></h6>
                     <ul className="offer-details list-group list-group-flush">
                         <li className="list-group-item">
-                            <div className="card-text"><span><block>{school.profile}</block></span>
+                            <div className="card-text"><span>{school.profile}</span>
                             </div>
                         </li>
                     </ul>
                     <h6 className="card-title"><span> - Директор: </span>
-                        <span><block></block>{school.director}</span></h6>
+                        <span>{school.director}</span></h6>
                     <h6 className="card-title"><span> - Телефон: </span>
-                        <span><block>{school.telephone}</block></span></h6>
+                        <span>{school.telephone}</span></h6>
                     <h6 className="card-title"><span> - Имейл: </span>
-                        <span><block>{school.email}</block></span></h6>
+                        <span>{school.email}</span></h6>
                     <h6 className="card-title"><span> - Адрес: </span>
-                        <span><block>{school.address}</block></span></h6>
+                        <span>{school.address}</span></h6>
 
                     <div className="card-body">
                         <Link className="card-link" to="/schools/all">Назад</Link>
