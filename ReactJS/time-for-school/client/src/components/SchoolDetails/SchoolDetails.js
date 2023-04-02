@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { schoolServiceFactory } from '../../services/schoolService';
-// import * as schoolServiceFactory from '../../services/schoolService';
-// import * as commentService from '../../services/commentService';
 import { useService } from '../../hooks/useService';
 
 export const SchoolDetails = () => {
     const { schoolId } = useParams();
-    // const { userId, isAuthenticated, userEmail } = useAuthContext();
 	const [school, setSchool] = useState({});
     const schoolService = useService(schoolServiceFactory)
-    const navigate = useNavigate();
 
 	useEffect(() => {
         schoolService.getOne(schoolId)

@@ -40,7 +40,7 @@ export const Home = () => {
                 <div className="row">
                     <div className="col col-md-4">
                         <div className="button-holder d-flex">
-                            <Link className="btn btn-info btn-lg" to="/schools/all">Намери курс</Link>
+                            <Link className="btn btn-info btn-lg" to="/offers/all">Намери курс</Link>
                         </div>
                     </div>
                 </div>

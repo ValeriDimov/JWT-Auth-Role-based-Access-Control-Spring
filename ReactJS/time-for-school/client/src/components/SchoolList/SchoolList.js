@@ -24,6 +24,7 @@ export const SchoolList = () => {
 
     const [pageNumber, setPageNumber] = useState(1);
     const [postNumber, setPostNumber] = useState(10);
+   
     const pageOffset = 10;
 
     let schoolsForPagination = schools;
@@ -82,10 +83,10 @@ export const SchoolList = () => {
 
                 } else if(schoolDistrictFilter && !schoolProfileFilter){
                     window.alert(`Училище съдържащо в името "${schoolNameFilter}" в район "${schoolDistrictFilter}" не е намерено!`);
-                
+
                 } else if(!schoolDistrictFilter && schoolProfileFilter) {
                     window.alert(`Училище съдържащо в името "${schoolNameFilter}" и с обучителен профил "${schoolProfileFilter}" не е намерено!`);
-              
+
                 } else {
                     window.alert(`Училище съдържащо в името "${schoolNameFilter}", в район "${schoolDistrictFilter}" и с обучителен профил "${schoolProfileFilter}" не е намерено!`);
                 }
@@ -191,7 +192,7 @@ export const SchoolList = () => {
                                     <option value="">-- Избери Район --</option>
                                     
                                     {schoolDistricts.map((x) => (
-                                        <option value={x}>{x}</option>
+                                        <option value={x} key={x.index}>{x}</option>
                                     ))}
 
                                 </select>
@@ -208,7 +209,7 @@ export const SchoolList = () => {
                                     <option value="">-- Избери обучителен профил --</option>
 
                                     {schoolProfiles.map((x) => (
-                                        <option value={x}>{x}</option>
+                                        <option value={x}  key={x.index}>{x}</option>
                                     ))}
 
                                 </select>
