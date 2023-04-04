@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { OfferItem } from "./OfferItem/OfferItem";
+import { useOfferContext } from "../../contexts/OfferContext";
 
 let filteredOffers = "";
 let filteredOffersForPagination = "";
@@ -13,9 +14,8 @@ const FilterFormKeys = {
 };
 
 
-export const OfferList = ({
-    offers,
-}) => {
+export const OfferList = () => {
+    const { offers } = useOfferContext();
     const [pageNumber, setPageNumber] = useState(1);
     const [postNumber, setPostNumber] = useState(2);
 
@@ -38,7 +38,7 @@ export const OfferList = ({
         e.preventDefault()
 
         const offerNameFilter = values.name;
-debugger
+
         if(offerNameFilter) {
             filteredOffers = offers.filter(x => 
                 x.course.toLowerCase().includes(offerNameFilter.toLowerCase()));  

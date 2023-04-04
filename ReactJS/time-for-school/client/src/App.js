@@ -2,6 +2,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import { AuthProvider } from './contexts/AuthContext';
+import { OfferProvider } from './contexts/OfferContext';
+
 import { offerServiceFactory } from './services/offerService';
 
 import { Header } from "./components/Header/Header";
@@ -13,6 +15,7 @@ import { SchoolList } from './components/SchoolList/SchoolList';
 import { SchoolDetails } from './components/SchoolDetails/SchoolDetails';
 import { AddOffer } from './components/AddOffer/AddOffer';
 import { OfferList } from './components/OfferList/OfferList';
+import { OfferDetails } from './components/OfferDetails/OfferDetails';
 
 function App() {
 	const navigate = useNavigate();
@@ -44,19 +47,21 @@ function App() {
 
   return (
     <AuthProvider>
-		<Header />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path='/login' element={<Login />} />
-				<Route path='/logout' element={<Logout />} />
-				<Route path='/register' element={<Register />} />
-				<Route path='/schools/all' element={<SchoolList />} />
-				<Route path='/schools/:schoolId' element={<SchoolDetails />} />
-				<Route path='/offers/add' element={<AddOffer onCreateOfferSubmit={onCreateOfferSubmit}/>} />
-				<Route path='/offers/all' element={<OfferList offers={offers}/>} />
+		<OfferProvider>
+			<Header />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path='/login' element={<Login />} />
+					<Route path='/logout' element={<Logout />} />
+					<Route path='/register' element={<Register />} />
+					<Route path='/schools/all' element={<SchoolList />} />
+					<Route path='/schools/:schoolId' element={<SchoolDetails />} />
+					<Route path='/offers/add' element={<AddOffer onCreateOfferSubmit={onCreateOfferSubmit}/>} />
+					<Route path='/offers/all' element={<OfferList />} />
+					<Route path='/offers/:offerId' element={<OfferDetails />} />
 
-
-			</Routes>
+				</Routes>
+		</OfferProvider>
     </AuthProvider>
   );
 }
