@@ -9,7 +9,7 @@ import { useOfferContext } from "../../contexts/OfferContext";
 export const OfferDetails = () => {
     const { offerId } = useParams();
     const { userId, isAuthenticated, name } = useAuthContext();
-    const deleteOffer = useOfferContext();
+    const { deleteOffer } = useOfferContext();
 
 	const [offer, setOffer] = useState({});
     const offerService = useService(offerServiceFactory);
@@ -38,6 +38,7 @@ export const OfferDetails = () => {
         navigate("/offers/all");
     };
 
+    // TODO: Commments implementation
 
     return (
         <div className="container-fluid">
@@ -72,37 +73,44 @@ export const OfferDetails = () => {
                             </div>
                         </li>
                     </ul>
-                    <div className="card-body">
-                        <form 
-                        method="DELETE"
-                        onSubmit={onDeleteSubmit}>
+                    {isOwner && (
+                        <div className="card-body">
+                            <form 
+                            method="DELETE"
+                            onSubmit={onDeleteSubmit}>
+                                <div className="row">
+                                    <div className="col col-md-4">
+                                        <div className="button-holder d-flex">
+                                            <input
+                                                type="submit"
+                                                className="btn btn-info btn-lg"
+                                                value="Изтрий"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    )}
+
+                    {isOwner && (
+                        <form>
                             <div className="row">
                                 <div className="col col-md-4">
                                     <div className="button-holder d-flex">
-                                        <input
-                                            type="submit"
+                                         <Link
                                             className="btn btn-info btn-lg"
-                                            value="Изтрий"
-                                        />
+                                            to={`/offers/${offerId}/edit`}
+                                            >Редактирай/обнови оферта
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    )}
 
-                    <form method="POST">
-                        <div className="row">
-                            <div className="col col-md-4">
-                                <div className="button-holder d-flex">
-                                    <input
-                                        type="submit"
-                                        className="btn btn-info btn-lg"
-                                        value="Редактирай/обнови оферта"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                
+                    {/* {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />} */}
 
                     <div className="card-body">
                         <Link

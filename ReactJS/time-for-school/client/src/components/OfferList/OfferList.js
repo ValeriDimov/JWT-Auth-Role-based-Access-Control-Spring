@@ -123,10 +123,6 @@ export const OfferList = () => {
                 <button disabled={true}>next</button>
                 : <button onClick={handleNext}>next</button>}
                 </div>
-        
-            {/* {paginatedOffers.map(x => (
-                <OfferItem key={x._id} offer_id={x._id} {...x}/>
-            ))} */}
 
             {filteredOffers.length === 0 
                 ? paginatedOffers.map((x) => (

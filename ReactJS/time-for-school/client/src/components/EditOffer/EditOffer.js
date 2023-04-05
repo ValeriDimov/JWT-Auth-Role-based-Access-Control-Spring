@@ -1,27 +1,39 @@
-import { Link } from "react-router-dom";
-import { useForm } from '../../hooks/useForm';
+import { useParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 
-import { useAuthContext } from '../../contexts/AuthContext';
 import { useOfferContext } from "../../contexts/OfferContext";
+import { useService } from "../../hooks/useService";
+import { offerServiceFactory } from "../../services/offerService";
 
-import styles from './AddOffer.module.css';
+import { useForm } from "../../hooks/useForm";
+import { useAuthContext } from "../../contexts/AuthContext";
 
+import styles from './EdithOffer.module.css';
 
-export const AddOffer = () => {
-    const { onCreateOfferSubmit } = useOfferContext();
+export const EdithOffer = () => {
+    const { onOfferEditSubmit } = useOfferContext();
     const { isAuthenticated, name } = useAuthContext();
+    const { offerId } = useParams();
+    const offerService = useService(offerServiceFactory);
 
-    const { values, changeHandler, onSubmit } = useForm({
+    const { values, changeHandler, changeValues,  onSubmit } = useForm({
         course: '',
         description: '',
         contact: '',
         name,
-    }, onCreateOfferSubmit);
+    }, onOfferEditSubmit);
 
+    useEffect(() => {
+        offerService.getOne(offerId)
+            .then(result => {
+                changeValues(result);
+            });
+    }, [offerId]);
+ 
     return (
         <div className="container">
             <h2 className="text-center text-white">
-            Публикувай обява
+            Редактирай обява
             </h2>
 
             <form
@@ -42,7 +54,6 @@ export const AddOffer = () => {
                         onChange={changeHandler}
                         name="course"
                         className="form-control"
-                        placeholder="Напишете името на курса тук"
                     />
                     <p className="invalid-feedback errors alert alert-danger">
                         <span>Име на курс е задължително.</span>
@@ -63,7 +74,6 @@ export const AddOffer = () => {
                         name="description"
                         className="form-control"
                         rows="3"
-                        placeholder="Напишете описанието на курса тук"
                     ></textarea>
                     <p className="invalid-feedback errors alert alert-danger">
                         <span>Описанието е задължително.</span>
@@ -84,7 +94,6 @@ export const AddOffer = () => {
                         name="contact"
                         className="form-control"
                         rows="3"
-                        placeholder="Поставете вашите контакти тук"
                     ></textarea>
                     <p className="invalid-feedback errors alert alert-danger">
                         <span>Контактите са задължителни.</span>
@@ -99,7 +108,7 @@ export const AddOffer = () => {
                         <input
                             type="submit"
                             className="btn btn-info btn-lg"
-                            value="Публикувай"
+                            value="Редектирай"
                         />
                     </div>
                 </div>
@@ -111,11 +120,11 @@ export const AddOffer = () => {
                     <div className="card-body">
                         <Link
                         className="card-link"
-                        to={"/"}
+                        to={`/offers/${offerId}`}
                         >Назад</Link>
                     </div>
                 </div>
             </form>
         </div>
     );
-};
+}; 
