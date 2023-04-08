@@ -2,9 +2,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { useService } from "../../hooks/useService";
-import { offerServiceFactory } from "../../services/offerService"
+import * as commentService from "../../services/commentService";
+import { offerServiceFactory } from "../../services/offerService";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useOfferContext } from "../../contexts/OfferContext";
+import { AddComment } from "./AddComment/AddComment";
+
+import styles from "./OfferDetails.module.css";
 
 export const OfferDetails = () => {
     const { offerId } = useParams();
@@ -12,6 +16,7 @@ export const OfferDetails = () => {
     const { deleteOffer } = useOfferContext();
 
 	const [offer, setOffer] = useState({});
+	const [comments, setComments] = useState([]);
     const offerService = useService(offerServiceFactory);
     const navigate = useNavigate();
 
@@ -23,6 +28,31 @@ export const OfferDetails = () => {
                 setOffer(result)
             })
     }, [offerId]);
+
+    try {
+        useEffect(() => {
+            commentService.getAll(offerId)
+                .then(result => {
+                    setComments(result)
+                })
+        }, [offerId]);
+    } catch {
+        console.error("error");
+    }
+
+    const onCommentSubmit = async (values) => {
+        
+        if(values.comment) {
+        const response = await commentService.create(offerId, values);
+
+        setComments(state => [...state, response]);
+
+        navigate(`/offers/${offerId}`);
+        } else {
+            return;
+        }
+            
+    };
 
     const onDeleteSubmit = async (e) => {
         e.preventDefault();
@@ -37,8 +67,6 @@ export const OfferDetails = () => {
 
         navigate("/offers/all");
     };
-
-    // TODO: Commments implementation
 
     return (
         <div className="container-fluid">
@@ -110,13 +138,28 @@ export const OfferDetails = () => {
                     )}
 
                 
-                    {/* {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />} */}
+                    {isAuthenticated && <AddComment onCommentSubmit={onCommentSubmit} />}
 
                     <div className="card-body">
                         <Link
                             className="card-link"
                             to="/offers/all"
                         >Назад</Link>
+                    </div>                  
+                    
+                    <div className="card-body pb-1">
+                        <h4 className="card-title text-center">Коментари:</h4>
+                        <ul>
+                            {comments.length === 0 ? (
+                                    <p className={styles['no-comment']}>"Няма коментари"</p>)
+
+                             :
+                            comments.map((x) => (
+                                <li className="list-group-item" key={x._id}>
+                                    <p> <b>{x.comment.name}</b>: {x.comment.comment}</p>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 </div>
             </div>
