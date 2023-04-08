@@ -10,7 +10,7 @@ let nameField = "";
 
 export const Register = () => {
     const [errorField, setErrorField] = useState();
-    const { onRegisterSubmit } = useContext(AuthContext);
+    const { onRegisterSubmit, isAuthenticated } = useContext(AuthContext);
     const { values, changeHandler, onSubmit } = useForm({
         name: '',
         email: '',
@@ -148,6 +148,8 @@ export const Register = () => {
                         }
                 </div>
             </div>
+            {!isAuthenticated 
+            ?
             <div className="row">
                 <div className="col mx-auto col-md-8 d-flex flex-column justify-content-center">
                     <div className="button-holder d-flex">
@@ -155,6 +157,8 @@ export const Register = () => {
                     </div>
                 </div>
             </div>
+            : <div className={styles['non-authrized']}>Вече сте влезнали във Вашия профил!</div>
+            }
             <div className="row">
                 <div className="col mx-auto col-md-8 d-flex flex-column justify-content-center">
                     <div className="card-body">

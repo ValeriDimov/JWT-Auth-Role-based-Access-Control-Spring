@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useForm } from "../../hooks/useForm";
 
+import styles from './Login.module.css';
+
+
 const LoginFormKeys = {
     Email: "email",
     Password: "password",
 };
 
 export const Login = () => {
-  const { onLoginSubmit } = useAuthContext();
+  const { onLoginSubmit, isAuthenticated } = useAuthContext();
   const { values, changeHandler, onSubmit } = useForm(
     {
       [LoginFormKeys.Email]: "",
@@ -61,6 +64,8 @@ export const Login = () => {
             />
           </div>
 
+          {!isAuthenticated 
+            ?
           <div className="row">
             <div className="col col-md-4">
               <div className="button-holder d-flex">
@@ -72,6 +77,8 @@ export const Login = () => {
               </div>
             </div>
           </div>
+          : <div className={styles['non-authrized']}>Вече сте влезнали във Вашия профил!</div>
+          }
           <div className="card-body">
             <Link className="card-link" to="/">
               Назад
