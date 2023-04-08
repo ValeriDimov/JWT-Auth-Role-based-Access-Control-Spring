@@ -90,7 +90,7 @@ export const OfferList = () => {
                 <Link className="card-link" to={"/"}>Назад</Link>
             </div>
             <form
-                className="main-form mx-auto col-md-8 d-flex flex-column justify-content-center"
+                className="main-form mx-auto col-md-8 d-flex flex-column justify-content-center align-items-center"
                 onSubmit={onSubmit}>
 
                 <div>

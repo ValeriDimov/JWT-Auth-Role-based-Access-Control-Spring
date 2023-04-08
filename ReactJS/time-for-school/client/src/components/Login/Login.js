@@ -61,10 +61,6 @@ export const Login = () => {
             />
           </div>
 
-          <p if="${bad_credentials}" className="errors alert alert-danger">
-            <span text="Невалидно потребителско име и парола"></span>
-          </p>
-
           <div className="row">
             <div className="col col-md-4">
               <div className="button-holder d-flex">

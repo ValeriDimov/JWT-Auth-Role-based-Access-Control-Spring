@@ -22,13 +22,18 @@ export const AuthProvider = ({
 
             navigate('/');
         } catch (error) {
-            console.log('There is a problem');
+            window.alert('Неправилно име или парола');
         }
     };
 
     const onRegisterSubmit = async (values) => {
         const { confirmPassword, ...registerData } = values;
         if (confirmPassword !== registerData.password) {
+            return;
+        }
+
+        if (registerData.name === "") {
+            window.alert('Регистрационната форма не може да бъде завършена без да бъде попълнено име');
             return;
         }
 
@@ -39,7 +44,7 @@ export const AuthProvider = ({
 
             navigate('/');
         } catch (error) {
-            console.log('There is a problem');
+            window.alert('Регистрационната форма не може да бъде завършена без да бъде попълнена');
         }
     };
 

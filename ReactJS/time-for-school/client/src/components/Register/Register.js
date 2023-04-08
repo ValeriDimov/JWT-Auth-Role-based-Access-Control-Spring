@@ -1,10 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useForm } from "../../hooks/useForm";
 import { AuthContext } from "../../contexts/AuthContext";
 
+import styles from "./Register.module.css";
+
+let nameField = "";
+
 export const Register = () => {
+    const [errorField, setErrorField] = useState();
     const { onRegisterSubmit } = useContext(AuthContext);
     const { values, changeHandler, onSubmit } = useForm({
         name: '',
@@ -13,10 +18,51 @@ export const Register = () => {
         confirmPassword: '',
     }, onRegisterSubmit);
 
+
+    const onBlurHandlerName = (e) => {
+        if (e.target.value.length < 5) {
+            nameField = "Потребителското име трябва да бъде минимум 5 символа"
+            setErrorField(nameField);
+        } else {
+            nameField = ""
+            setErrorField(nameField);
+        }
+    }
+
+    const onBlurHandlerEmail = (e) => {
+        if (!e.target.value.includes("@")) {
+            nameField = `Вашият имейл адрес трябва да съдържа "@"`;
+            setErrorField(nameField);
+        } else {
+            nameField = ""
+            setErrorField(nameField);
+        }
+    }
+
+    const onBlurHandlerPass = (e) => {
+        if (e.target.value.length < 5) {
+            nameField = "Паролата трябва да бъде минимум 5 символа";
+            setErrorField(nameField);
+        } else {
+            nameField = "";
+            setErrorField(nameField);
+        }
+    }
+
+    const onBlurHandlerPassConfirm = () => {
+        if (values.password !== values.confirmPassword) {
+            nameField = "Потвърждението на паролата трябва да съвпада с въведената парола";
+            setErrorField(nameField);
+        } else {
+            nameField = "";
+            setErrorField(nameField);
+        }
+    }
+
     return (
     <div className="container">
         <h2 className="text-center text-white">Регистрация на потребител</h2>
-        <h6 className="text-center text-white">Регистрационната форма е предназначена само за учебни центрове и учители с цел да могат да регистрират обява</h6>
+        <h6 className="text-center text-white">Регистрационната форма е предназначена за учебни центрове и учители с цел публикуване на обяви, както и за всички потребители, които желаят да оставят коментари</h6>
         <form
             className="main-form mx-auto col-md-8 d-flex flex-column justify-content-center"
             method="post"
@@ -31,11 +77,15 @@ export const Register = () => {
                         className="form-control"
                         placeholder="Име"
                         value={values.name}
-                        onChange={changeHandler}/>
+                        onChange={changeHandler}
+                        onBlur={onBlurHandlerName}/>
 
-                    <p className="invalid-feedback errors alert alert-danger">
-                        <span>Името е задължително и трябва да бъде между 2 и 20 символа.</span>
+                    {errorField === "Потребителското име трябва да бъде минимум 5 символа" && (
+                        <p className={styles['error-field-name']}>
+                        <span>{errorField}</span>
                     </p>
+                    )}
+                    
                 </div>
             </div>
             <div className="row">
@@ -49,10 +99,13 @@ export const Register = () => {
                         placeholder="Email"
                         value={values.email}
                         onChange={changeHandler}
-                        />
-                    <div className="invalid-feedback errors alert alert-danger">
-                        
-                    </div>
+                        onBlur={onBlurHandlerEmail}/>
+
+                    {errorField === `Вашият имейл адрес трябва да съдържа "@"` && (
+                        <p className={styles['error-field-name']}>
+                        <span>{errorField}</span>
+                    </p>
+                    )}
                 </div>
             </div>
             <div className="row">
@@ -66,10 +119,13 @@ export const Register = () => {
                         placeholder="Парола"
                         value={values.password}
                         onChange={changeHandler}
-                        />
-                    <p className="invalid-feedback errors alert alert-danger">
-                        <span>Паролата е задължителна и трябва да бъде поне 5 символа.</span>
-                    </p>
+                        onBlur={onBlurHandlerPass}/>
+
+                        {errorField === "Паролата трябва да бъде минимум 5 символа" && (
+                        <p className={styles['error-field-name']}>
+                            <span>{errorField}</span>
+                        </p>
+                    )}
                 </div>
             </div>
             <div className="row">
@@ -83,13 +139,13 @@ export const Register = () => {
                         placeholder="Потвърдете парола"
                         value={values.confirmPassword}
                         onChange={changeHandler}
-                    />
-                    ({values.password !== values.confirmPassword ? 
-                    <p className="invalid-feedback errors alert alert-danger">
-                        <span>Паролите трябва да съвпадат</span>
-                    </p>
-                    : ''
-                    })
+                        onBlur={onBlurHandlerPassConfirm}/>
+
+                        {errorField === "Потвърждението на паролата трябва да съвпада с въведената парола" && (                        
+                            <p className={styles['error-field-name']}>
+                                <span>{errorField}</span>
+                            </p>)
+                        }
                 </div>
             </div>
             <div className="row">

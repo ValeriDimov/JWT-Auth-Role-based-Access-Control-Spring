@@ -44,12 +44,12 @@ export const Header = () => {
                         <>
                         <li className="nav-item">
                             <Link className="nav-link text-white" to="/register">
-                            Регистрация за учебни центрове/учители
+                            Регистрация
                             </Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link text-white" to="/login">
-                            Вход за учебни центрове/учители
+                            Вход
                             </Link>
                         </li>
                         </>
