@@ -21,3 +21,11 @@ export const create = async (offerId, comment) => {
     return result;
 
 };
+
+export const deleteComment = async (commentId) => {
+    
+    const result = await request.delete(`${baseUrl}/${commentId}`);
+
+    return result;
+
+};

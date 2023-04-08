@@ -7,6 +7,7 @@ import { offerServiceFactory } from "../../services/offerService";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useOfferContext } from "../../contexts/OfferContext";
 import { AddComment } from "./AddComment/AddComment";
+import { DeleteComment } from "./DeleteComment/DeleteComment";
 
 import styles from "./OfferDetails.module.css";
 
@@ -67,6 +68,11 @@ export const OfferDetails = () => {
 
         navigate("/offers/all");
     };
+
+    commentService.getAll(offerId)
+                .then(result => {
+                    setComments(result)
+                })
 
     return (
         <div className="container-fluid">
@@ -155,9 +161,29 @@ export const OfferDetails = () => {
 
                              :
                             comments.map((x) => (
-                                <li className="list-group-item" key={x._id}>
-                                    <p> <b>{x.comment.name}</b>: {x.comment.comment}</p>
-                                </li>
+                                <DeleteComment offerOwnerId={offer._ownerId} x={x} key={x._id} {...x} />
+                                // <li className="list-group-item" key={x._id}>
+                                //     <p> <b>{x.comment.name}</b>: {x.comment.comment}</p>
+                                //         {offer._ownerId === x._ownerId && (
+                                //             <div className="card-body">
+                                //                 <form 
+                                //                 method="DELETE"
+                                //                 onSubmit={onDeleteCommentSubmit}>
+                                //                     <div className="row">
+                                //                         <div className="col col-md-4">
+                                //                             <div className="button-holder d-flex">
+                                //                                 <input
+                                //                                     type="submit"
+                                //                                     className="btn btn-info btn-lg"
+                                //                                     value="Изтрий"
+                                //                                 />
+                                //                             </div>
+                                //                         </div>
+                                //                     </div>
+                                //                 </form>
+                                //             </div>
+                                //         )}
+                                // </li>
                             ))}
                         </ul>
                     </div>
