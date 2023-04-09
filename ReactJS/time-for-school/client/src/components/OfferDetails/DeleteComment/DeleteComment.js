@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import * as commentService from "../../../services/commentService";
 
-export const DeleteComment = ({offerOwnerId, x}) => {
+export const DeleteComment = ({userId, x}) => {
     const { offerId } = useParams();
     const navigate = useNavigate();
 
@@ -13,17 +13,18 @@ export const DeleteComment = ({offerOwnerId, x}) => {
 
         if (result) {
             await commentService.deleteComment(x._id);
-        }
-
-        navigate(`/offers/${offerId}`);
-    };
+            navigate(`/offers/all`);
+        } else {
+          navigate(`/offers/${offerId}`);
+       }
+  };
 
     return (
     <li className="list-group-item">
       <p>
         <b>{x.comment.name}</b>: {x.comment.comment}
       </p>
-      {offerOwnerId === x._ownerId && (
+      {userId === x._ownerId && (
         <div className="card-body">
           <form method="DELETE" onSubmit={onDeleteCommentSubmit}>
             <div className="row">

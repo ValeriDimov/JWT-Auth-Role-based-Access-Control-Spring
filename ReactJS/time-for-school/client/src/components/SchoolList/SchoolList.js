@@ -191,8 +191,8 @@ export const SchoolList = () => {
                                         >
                                     <option value="">-- Избери Район --</option>
                                     
-                                    {schoolDistricts.map((x) => (
-                                        <option value={x} key={x.index}>{x}</option>
+                                    {schoolDistricts.map((x, index) => (
+                                        <option value={x} key={index}>{x}</option>
                                     ))}
 
                                 </select>
@@ -208,8 +208,8 @@ export const SchoolList = () => {
                                         >
                                     <option value="">-- Избери обучителен профил --</option>
 
-                                    {schoolProfiles.map((x) => (
-                                        <option value={x}  key={x.index}>{x}</option>
+                                    {schoolProfiles.map((x, index) => (
+                                        <option value={x}  key={index}>{x}</option>
                                     ))}
 
                                 </select>

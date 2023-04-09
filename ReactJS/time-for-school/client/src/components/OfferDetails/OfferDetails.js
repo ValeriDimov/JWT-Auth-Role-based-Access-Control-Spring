@@ -69,11 +69,6 @@ export const OfferDetails = () => {
         navigate("/offers/all");
     };
 
-    commentService.getAll(offerId)
-                .then(result => {
-                    setComments(result)
-                })
-
     return (
         <div className="container-fluid">
             <h2 className="text-center text-white mt-5">
@@ -161,29 +156,7 @@ export const OfferDetails = () => {
 
                              :
                             comments.map((x) => (
-                                <DeleteComment offerOwnerId={offer._ownerId} x={x} key={x._id} {...x} />
-                                // <li className="list-group-item" key={x._id}>
-                                //     <p> <b>{x.comment.name}</b>: {x.comment.comment}</p>
-                                //         {offer._ownerId === x._ownerId && (
-                                //             <div className="card-body">
-                                //                 <form 
-                                //                 method="DELETE"
-                                //                 onSubmit={onDeleteCommentSubmit}>
-                                //                     <div className="row">
-                                //                         <div className="col col-md-4">
-                                //                             <div className="button-holder d-flex">
-                                //                                 <input
-                                //                                     type="submit"
-                                //                                     className="btn btn-info btn-lg"
-                                //                                     value="Изтрий"
-                                //                                 />
-                                //                             </div>
-                                //                         </div>
-                                //                     </div>
-                                //                 </form>
-                                //             </div>
-                                //         )}
-                                // </li>
+                                <DeleteComment userId={userId} x={x} key={x._id} {...x} />
                             ))}
                         </ul>
                     </div>
