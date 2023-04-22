@@ -14,6 +14,8 @@ import { AddOffer } from './components/AddOffer/AddOffer';
 import { OfferList } from './components/OfferList/OfferList';
 import { OfferDetails } from './components/OfferDetails/OfferDetails';
 import { EdithOffer } from './components/EditOffer/EditOffer';
+import { RouteGuardAuthenticated } from './components/common/RouteGuardAuthenticated';
+import { RouteGuardNotAuthenticated } from './components/common/RouteGuardNotAuthenticated';
 
 function App() {
 
@@ -23,15 +25,21 @@ function App() {
 			<Header />
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path='/login' element={<Login />} />
-					<Route path='/logout' element={<Logout />} />
-					<Route path='/register' element={<Register />} />
 					<Route path='/schools/all' element={<SchoolList />} />
 					<Route path='/schools/:schoolId' element={<SchoolDetails />} />
-					<Route path='/offers/add' element={<AddOffer />} />
 					<Route path='/offers/all' element={<OfferList />} />
 					<Route path='/offers/:offerId' element={<OfferDetails />} />
-					<Route path='/offers/:offerId/edit' element={<EdithOffer />} />
+					
+					<Route element={<RouteGuardNotAuthenticated />}>
+						<Route path='/login' element={<Login />} />
+						<Route path='/register' element={<Register />} />
+					</Route>
+
+					<Route element={<RouteGuardAuthenticated />}>
+						<Route path='/offers/add' element={<AddOffer />} />
+						<Route path='/offers/:offerId/edit' element={<EdithOffer />} />
+						<Route path='/logout' element={<Logout />} />
+					</Route>
 
 				</Routes>
 		</OfferProvider>

@@ -62,9 +62,11 @@ export const OfferDetails = () => {
 
         if (result) {
             await offerService.delete(offer._id);
+
+            deleteOffer(offer._id);
+
         }
 
-        deleteOffer(offer._id);
 
         navigate("/offers/all");
     };
