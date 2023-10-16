@@ -1,5 +1,6 @@
 package bg.bestsurebet.server.model.entity.sheet;
 
+import bg.bestsurebet.server.model.entity.Event;
 import bg.bestsurebet.server.model.entity.Market1x2;
 import jakarta.persistence.*;
 
@@ -11,11 +12,13 @@ public class EfbetSheet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(targetEntity = Event.class)
+    private Event event;
+
     @Column(unique = true, nullable = false)
     private String identifier;
 
-    @ManyToOne(targetEntity = Market1x2.class)
-    private Market1x2 market1x2;
+    private String oneXTwo;
 
     public Long getId() {
         return id;
@@ -26,12 +29,21 @@ public class EfbetSheet {
         return this;
     }
 
-    public Market1x2 getMarket1x2() {
-        return market1x2;
+    public Event getEvent() {
+        return event;
     }
 
-    public EfbetSheet setMarket1x2(Market1x2 market1x2) {
-        this.market1x2 = market1x2;
+    public EfbetSheet setEvent(Event event) {
+        this.event = event;
+        return this;
+    }
+
+    public String getOneXTwo() {
+        return oneXTwo;
+    }
+
+    public EfbetSheet setOneXTwo(String oneXTwo) {
+        this.oneXTwo = oneXTwo;
         return this;
     }
 

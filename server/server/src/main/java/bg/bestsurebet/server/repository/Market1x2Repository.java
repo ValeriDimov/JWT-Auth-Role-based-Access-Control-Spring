@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface Market1x2Repository extends JpaRepository<Market1x2, Long> {
 
     Optional<Market1x2> findByEventIdentifier(String identifier);
+
+    @Override
+    void deleteAll();
 }

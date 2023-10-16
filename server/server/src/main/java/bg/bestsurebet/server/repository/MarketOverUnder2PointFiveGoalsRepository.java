@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface MarketOverUnder2PointFiveGoalsRepository extends JpaRepository<MarketOverUnder2PointFiveGoals, Long> {
 
     Optional<MarketOverUnder2PointFiveGoals> findByEventIdentifier(String identifier);
+
+    @Override
+    void deleteAll();
 }

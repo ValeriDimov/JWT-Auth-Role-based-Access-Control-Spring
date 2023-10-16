@@ -4,8 +4,8 @@ import bg.bestsurebet.server.model.entity.Event;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "betano_sheets")
-public class BetanoSheet {
+@Table(name = "inbet_sheets")
+public class InbetSheet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class BetanoSheet {
 
     private String oneXTwo;
 
-    private String goalNoGoal;
+    private String bothTeamsToScore;
 
     private String overUnder;
 
@@ -27,7 +27,7 @@ public class BetanoSheet {
         return id;
     }
 
-    public BetanoSheet setId(Long id) {
+    public InbetSheet setId(Long id) {
         this.id = id;
         return this;
     }
@@ -36,7 +36,7 @@ public class BetanoSheet {
         return identifier;
     }
 
-    public BetanoSheet setIdentifier(String identifier) {
+    public InbetSheet setIdentifier(String identifier) {
         this.identifier = identifier;
         return this;
     }
@@ -45,7 +45,7 @@ public class BetanoSheet {
         return event;
     }
 
-    public BetanoSheet setEvent(Event event) {
+    public InbetSheet setEvent(Event event) {
         this.event = event;
         return this;
     }
@@ -54,17 +54,17 @@ public class BetanoSheet {
         return oneXTwo;
     }
 
-    public BetanoSheet setOneXTwo(String oneXTwo) {
+    public InbetSheet setOneXTwo(String oneXTwo) {
         this.oneXTwo = oneXTwo;
         return this;
     }
 
-    public String getGoalNoGoal() {
-        return goalNoGoal;
+    public String getBothTeamsToScore() {
+        return bothTeamsToScore;
     }
 
-    public BetanoSheet setGoalNoGoal(String goalNoGoal) {
-        this.goalNoGoal = goalNoGoal;
+    public InbetSheet setBothTeamsToScore(String bothTeamsToScore) {
+        this.bothTeamsToScore = bothTeamsToScore;
         return this;
     }
 
@@ -72,7 +72,7 @@ public class BetanoSheet {
         return overUnder;
     }
 
-    public BetanoSheet setOverUnder(String overUnder) {
+    public InbetSheet setOverUnder(String overUnder) {
         this.overUnder = overUnder;
         return this;
     }

@@ -17,9 +17,12 @@ public class TeamService {
 
     private final TeamNomenclatureRepository teamNomenclatureRepository;
 
-    public TeamService(TeamRepository teamRepository, TeamNomenclatureRepository teamNomenclatureRepository) {
+    private final ChampionshipService championshipService;
+
+    public TeamService(TeamRepository teamRepository, TeamNomenclatureRepository teamNomenclatureRepository, ChampionshipService championshipService) {
         this.teamRepository = teamRepository;
         this.teamNomenclatureRepository = teamNomenclatureRepository;
+        this.championshipService = championshipService;
     }
 
     public Team findTeamByName(String name, String bookmakerName) {
@@ -32,9 +35,9 @@ public class TeamService {
     }
 
     //TODO: Championship logic enhancement is required for non-national club tournaments;
-    public  Championship findTeamsChampionship(String teamNameOne, String teamNameTwo, String bookmakerName) {
+    public  Championship findTeamsChampionship(String teamNameOne, String teamNameTwo) {
 
-        return championshipFinder(teamNameOne, teamNameTwo, bookmakerName);
+        return championshipFinder(teamNameOne, teamNameTwo);
     }
 
     public Team save(Team newTeam) {
@@ -55,6 +58,16 @@ public class TeamService {
                 teamName = nameEfbet.isPresent() ? nameEfbet.get().getTeamNameMain() : name;
                 break;
 
+            case "www.inbet.com":
+                Optional<TeamNomenclature> nameInbet = this.teamNomenclatureRepository.findTeamNomenclatureByTeamNameInbet(name);
+                teamName = nameInbet.isPresent() ? nameInbet.get().getTeamNameMain() : name;
+                break;
+
+            case "www.winbet.bg":
+                Optional<TeamNomenclature> nameWinbet = this.teamNomenclatureRepository.findTeamNomenclatureByTeamNameWinbet(name);
+                teamName = nameWinbet.isPresent() ? nameWinbet.get().getTeamNameMain() : name;
+                break;
+
             default:
                 teamName = name;
                 break;
@@ -63,42 +76,39 @@ public class TeamService {
         return teamName;
     }
 
-    private Championship championshipFinder(String teamNameOne, String teamNameTwo, String bookmakerName) {
-        Championship championship = null;
+    private Championship championshipFinder(String teamNameOne, String teamNameTwo) {
+        Championship championship;
+        Championship championship1;
+        Championship championship2;
 
-        switch (bookmakerName) {
-            case "www.betano.bg":
-                Optional<TeamNomenclature> teamChampionshipBetano1 = this.teamNomenclatureRepository.findTeamNomenclatureByTeamNameBetano(teamNameOne);
-                Championship championshipBetano1 = teamChampionshipBetano1.isPresent() ? teamChampionshipBetano1.get().getChampionship() :
-                        new Championship().setName("Unknown1").setCountryOrTournament("Unknown tournament1").setSport(new Sport().setType("Football"));
+        Optional<TeamNomenclature> teamChampionship1 = this.teamNomenclatureRepository.findTeamNomenclatureByTeamNameMain(teamNameOne);
+        Optional<Championship> optionalChampionshipUnknown = this.championshipService.findChampionshipByName("Unknown");
+        Optional<Championship> optionalChampionshipInternational = this.championshipService.findChampionshipByName("International championship");
 
-                Optional<TeamNomenclature> teamChampionshipBetano2 = this.teamNomenclatureRepository.findTeamNomenclatureByTeamNameBetano(teamNameTwo);
-                Championship championshipBetano2 = teamChampionshipBetano2.isPresent() ? teamChampionshipBetano2.get().getChampionship() :
-                        new Championship().setName("Unknown2").setCountryOrTournament("Unknown tournament1").setSport(new Sport().setType("Football"));
+        if (teamChampionship1.isPresent()) {
+            championship1 = teamChampionship1.get().getChampionship();
 
-                if (championshipBetano1.equals(championshipBetano2)) {
-                    championship = championshipBetano1;
-                }
-                break;
-
-            case "www.efbet.com":
-                Optional<TeamNomenclature> teamChampionshipEfbet1 = this.teamNomenclatureRepository.findTeamNomenclatureByTeamNameBetano(teamNameOne);
-                Championship championshipEfbet1 = teamChampionshipEfbet1.isPresent() ? teamChampionshipEfbet1.get().getChampionship() :
-                        new Championship().setName("Unknown1").setCountryOrTournament("Unknown tournament1").setSport(new Sport().setType("Football"));
-
-                Optional<TeamNomenclature> teamChampionshipEfbet2 = this.teamNomenclatureRepository.findTeamNomenclatureByTeamNameBetano(teamNameTwo);
-                Championship championshipEfbet2 = teamChampionshipEfbet2.isPresent() ? teamChampionshipEfbet2.get().getChampionship() :
-                        new Championship().setName("Unknown2").setCountryOrTournament("Unknown tournament1").setSport(new Sport().setType("Football"));
-
-                if (championshipEfbet1.equals(championshipEfbet2)) {
-                    championship = championshipEfbet1;
-                }
-                break;
-
-            default:
-                championship = new Championship().setName("Unknown").setCountryOrTournament("Unknown tournament").setSport(new Sport().setType("Football"));
-                break;
+        } else {
+            championship1 = optionalChampionshipUnknown.get();
         }
+
+        Optional<TeamNomenclature> teamChampionship2 = this.teamNomenclatureRepository.findTeamNomenclatureByTeamNameMain(teamNameTwo);
+
+        if (teamChampionship2.isPresent()) {
+            championship2 = teamChampionship2.get().getChampionship();
+
+        } else {
+            championship2 = optionalChampionshipUnknown.get();
+        }
+
+        if (championship1.getName().equals(championship2.getName())) {
+            championship = championship1;
+
+        } else {
+            championship = optionalChampionshipInternational.get();
+        }
+
+        this.championshipService.save(championship);
 
         return championship;
     }

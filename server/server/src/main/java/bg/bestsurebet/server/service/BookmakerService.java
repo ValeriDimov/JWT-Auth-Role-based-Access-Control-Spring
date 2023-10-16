@@ -15,8 +15,11 @@ public class BookmakerService {
         this.bookmakerRepository = bookmakerRepository;
     }
 
-    public Optional<Bookmaker> findBookmakerByName(String name) {
-        return this.bookmakerRepository.findByName(name);
+    public Bookmaker findBookmakerByName(String name, String bookmaker) {
+        Optional<Bookmaker> optionalBookmaker = this.bookmakerRepository.findByName(name);
+
+        return optionalBookmaker.isPresent() ?
+                optionalBookmaker.get() : this.bookmakerRepository.save(new Bookmaker().setName(bookmaker));
     }
 
     public Bookmaker save(Bookmaker newBookmaker) {

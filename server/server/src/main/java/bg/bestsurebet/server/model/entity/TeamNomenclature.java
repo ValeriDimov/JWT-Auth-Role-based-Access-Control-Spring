@@ -22,6 +22,12 @@ public class TeamNomenclature {
     @Column(name = "team_name_efbet", nullable = false, unique = true)
     private String teamNameEfbet;
 
+    @Column(name = "team_name_inbet", nullable = false, unique = true)
+    private String teamNameInbet;
+
+    @Column(name = "team_name_winbet", nullable = false, unique = true)
+    private String teamNameWinbet;
+
     public Long getId() {
         return id;
     }
@@ -64,6 +70,24 @@ public class TeamNomenclature {
 
     public TeamNomenclature setTeamNameEfbet(String teamNameEfbet) {
         this.teamNameEfbet = teamNameEfbet;
+        return this;
+    }
+
+    public String getTeamNameInbet() {
+        return teamNameInbet;
+    }
+
+    public TeamNomenclature setTeamNameInbet(String teamNameInbet) {
+        this.teamNameInbet = teamNameInbet;
+        return this;
+    }
+
+    public String getTeamNameWinbet() {
+        return teamNameWinbet;
+    }
+
+    public TeamNomenclature setTeamNameWinbet(String teamNameWinbet) {
+        this.teamNameWinbet = teamNameWinbet;
         return this;
     }
 }

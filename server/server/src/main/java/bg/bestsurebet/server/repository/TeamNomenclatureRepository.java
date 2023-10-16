@@ -9,7 +9,9 @@ import java.util.Optional;
 @Repository
 public interface TeamNomenclatureRepository extends JpaRepository<TeamNomenclature, Long> {
 
+    Optional<TeamNomenclature> findTeamNomenclatureByTeamNameMain(String teamName);
     Optional<TeamNomenclature> findTeamNomenclatureByTeamNameBetano(String teamName);
     Optional<TeamNomenclature> findTeamNomenclatureByTeamNameEfbet(String teamName);
-
+    Optional<TeamNomenclature> findTeamNomenclatureByTeamNameInbet(String teamName);
+    Optional<TeamNomenclature> findTeamNomenclatureByTeamNameWinbet(String teamName);
 }
