@@ -1,0 +1,123 @@
+openapi: 3.0.3
+info:
+  description: server API
+  title: server API
+  version: 1.0.0
+servers:
+- url: https://server
+tags:
+- description: return all markets1x2
+  name: Get all markets1x2
+paths:
+  /api/bets:
+    get:
+      operationId: getAllMarkets1x2
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                items:
+                  $ref: '#/components/schemas/Market1x2DTO'
+                type: array
+          description: OK
+      summary: GET api/bets
+      tags:
+      - Get all markets1x2
+      x-accepts: '*/*'
+components:
+  schemas:
+    BookmakerDTO:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      type: object
+    TeamDTO:
+      example:
+        name: name
+      properties:
+        name:
+          type: string
+      type: object
+    ChampionshipDTO:
+      example:
+        countryOrTournament: countryOrTournament
+        name: name
+      properties:
+        name:
+          type: string
+        countryOrTournament:
+          type: string
+      type: object
+    EventDTO:
+      example:
+        date: 2000-01-23
+        championship:
+          countryOrTournament: countryOrTournament
+          name: name
+        teamTwo:
+          name: name
+        time: time
+        teamOne:
+          name: name
+      properties:
+        date:
+          format: date
+          type: string
+        time:
+          format: partial-time
+          type: string
+        teamOne:
+          $ref: '#/components/schemas/TeamDTO'
+        teamTwo:
+          $ref: '#/components/schemas/TeamDTO'
+        championship:
+          $ref: '#/components/schemas/ChampionshipDTO'
+      type: object
+    Market1x2DTO:
+      example:
+        coef1Bookmaker:
+          name: name
+        margin: 5.962133916683182
+        coefficientX: 6.027456183070403
+        coef2Bookmaker:
+          name: name
+        coefXBookmaker:
+          name: name
+        coefficient2: 1.4658129805029452
+        coefficient1: 0.8008281904610115
+        event:
+          date: 2000-01-23
+          championship:
+            countryOrTournament: countryOrTournament
+            name: name
+          teamTwo:
+            name: name
+          time: time
+          teamOne:
+            name: name
+      properties:
+        coefficient1:
+          format: double
+          type: number
+        coef1Bookmaker:
+          $ref: '#/components/schemas/BookmakerDTO'
+        coefficientX:
+          format: double
+          type: number
+        coefXBookmaker:
+          $ref: '#/components/schemas/BookmakerDTO'
+        coefficient2:
+          format: double
+          type: number
+        coef2Bookmaker:
+          $ref: '#/components/schemas/BookmakerDTO'
+        margin:
+          format: double
+          type: number
+        event:
+          $ref: '#/components/schemas/EventDTO'
+      type: object
+
