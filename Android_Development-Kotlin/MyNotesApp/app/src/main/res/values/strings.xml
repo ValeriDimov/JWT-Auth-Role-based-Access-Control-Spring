@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">My Notes App</string>
-    <string name="my_note_manager">MY NOTE MANAGER</string>
-    <string name="current_note">Current note</string>
-    <string name="enter_your_note_here">Enter your note here…</string>
-    <string name="save_note">Save Note</string>
-    <string name="show_saved_note">Show saved note</string>
-    <string name="my_note">My note:</string>
-</resources>
